@@ -3,3 +3,22 @@ title: "210 Project"
 author: "Austin Brown and Ryan Yu"
 format: pdf
 ---
+```{r}
+library(tidymodels)
+library(tidyverse)
+library(Stat2Data)
+library(MASS)
+library(caret)
+library(leaps)
+library(glmnet)
+library(broom)
+library(nnet)
+library(ggfortify)
+library(naniar)
+library(UpSetR)
+library(lme4)
+```
+
+```{r}
+player_data <- read.csv("https://query.data.world/s/5zns27g5v3ce74zgwtcosxygtexpef?dws=00000", header=TRUE, stringsAsFactors=FALSE);
+```
