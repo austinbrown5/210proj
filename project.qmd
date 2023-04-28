@@ -40,3 +40,19 @@ Potential Cleaning for College Column
 #player_data$college <- gsub("(?i)\\s*of\\s*", "", player_data$college)
 #unique(player_data$college)
 ```
+
+Position Variable
+```{r}
+```
+
+EDA
+```{r}
+```
+
+Ryan Model
+```{r}
+```
+
+Austin Model
+```{r}
+```
