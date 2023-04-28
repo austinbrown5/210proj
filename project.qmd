@@ -20,5 +20,23 @@ library(lme4)
 ```
 
 ```{r}
-player_data <- read.csv("https://query.data.world/s/5zns27g5v3ce74zgwtcosxygtexpef?dws=00000", header=TRUE, stringsAsFactors=FALSE);
+player_data <- read.csv(
+  "https://query.data.world/s/5zns27g5v3ce74zgwtcosxygtexpef?dws=00000", 
+  header=TRUE, stringsAsFactors=FALSE)
+player_data <-subset(player_data, select = -c(url,birth_date, X) )
+player_data$career_length <- player_data$active_to - player_data$active_from
+```
+
+
+Potential Cleaning for College Column
+```{r}
+#player_data$college <- gsub("\\bUniversity \\b", "", player_data$college)
+# Load library
+#library(stringr)
+
+# If there are two schools listed, only keep the first one
+#player_data$college <- str_extract(player_data$college, "^[^,]*")
+#player_data$college <- gsub("\\s*University\\s*", "", player_data$college)
+#player_data$college <- gsub("(?i)\\s*of\\s*", "", player_data$college)
+#unique(player_data$college)
 ```
