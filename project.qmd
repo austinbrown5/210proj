@@ -44,6 +44,8 @@ Potential Cleaning for College Column
 Position Variable
 ```{r}
 #test
+player_data$position <- sapply(strsplit(as.character(player_data$position), "-"), 
+                                function(x) if(length(x) >= 2) substring(x[[1]], 1, 1) ifelse(length(x) < 2) subtring(x[[1]])
 ```
 
 EDA
