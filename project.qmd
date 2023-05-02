@@ -51,6 +51,12 @@ player_data$position <- sapply(strsplit(as.character(player_data$position), "-")
 
 EDA
 ```{r}
+# filter for min attempts, also change axis lengtha
+ggplot(data = player_data, mapping = aes(x = NCAA__3ptpct, y = NBA__3ptpct)) +
+  geom_point() +
+  geom_smooth(method = "lm") + 
+  labs(title = "College vs. NBA 3pt. Percentage", 
+       x = "NCAA 3pt. %", y = "NBA 3pt. %")
 ```
 
 Ryan Model
