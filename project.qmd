@@ -50,14 +50,26 @@ player_data$position <- sapply(strsplit(as.character(player_data$position), "-")
 ```
 
 EDA
-```{r}
-# filter for min attempts, also change axis lengtha
-ggplot(data = player_data, mapping = aes(x = NCAA__3ptpct, y = NBA__3ptpct)) +
+```{r Graph1}
+# filter for min attempts, also change axis lengths
+player_data %>% filter(NBA__3ptapg > 0.5) %>% filter(NCAA__3ptapg > 0.5) %>%
+  filter(NBA_g_played > 20) %>% filter(NCAA_games > 20) %>%
+ggplot(mapping = aes(x = NCAA__3ptpct, y = NBA__3ptpct)) +
   geom_point() +
   geom_smooth(method = "lm") + 
   labs(title = "College vs. NBA 3pt. Percentage", 
-       x = "NCAA 3pt. %", y = "NBA 3pt. %")
+       x = "NCAA 3pt. %", y = "NBA 3pt. %") + ylim(0, .5) + xlim(0, .5)
 ```
+```{r Graph2}
+player_data %>% filter(NBA__3ptapg > 0.5) %>% filter(NCAA_ftapg > 0.3) %>%
+  filter(NBA_g_played > 20) %>% filter(NCAA_games > 20) %>%
+ggplot(mapping = aes(x = NCAA_ft, y = NBA__3ptpct)) +
+  geom_point() +
+  geom_smooth(method = "lm") + 
+  labs(title = "College FT Percentage vs. NBA 3pt. Percentage", 
+       x = "NCAA FT %", y = "NBA 3pt. %") + ylim(0, 0.5) + xlim(.3, 1)
+```
+
 
 Ryan Model
 ```{r}
