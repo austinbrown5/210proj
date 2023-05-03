@@ -82,9 +82,13 @@ Ryan Model
 options(digits = 3)
 
 # Subset the columns used in the linear regression model
-model_data <- player_data[c("NBA__3ptpct", "NCAA_ft", "NCAA__3ptpct", 
-                           "NCAA_fgpct")]
+player_data <- player_data %>%
+  filter(NBA__3ptapg > 0.5) %>% filter(NCAA__3ptapg > 0.5) %>%
+  filter(NBA_g_played > 20) %>% filter(NCAA_games > 20) %>% 
+  filter(NCAA_ftapg > 0.3) 
 
+model_data <- player_data[c("NBA__3ptpct", "NCAA_ft", "NCAA__3ptpct", 
+                           "NCAA_fgpct")] 
 # Remove observations with missing values from the subset
 model_data <- na.omit(model_data)
 
