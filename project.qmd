@@ -102,9 +102,9 @@ model_data <- player_data[c("NBA__3ptpct", "NCAA_ft", "NCAA__3ptpct",
 # Remove observations with missing values from the subset
 model_data <- na.omit(model_data)
 
-#nba3pt <- lm(NBA__3ptpct ~ NCAA_ft + NCAA__3ptpct + NCAA_fgpct +  
-#               NCAA_ft*position, data = model_data)
-nba3pt <- lm(NBA__3ptpct ~ NCAA__3ptpct, data = model_data)
+nba3pt <- lm(NBA__3ptpct ~ NCAA_ft + NCAA__3ptpct  
+       , data = model_data)
+#nba3pt <- lm(NBA__3ptpct ~ NCAA__3ptpct, data = model_data)
 tidy(nba3pt)
 
 ```
@@ -126,7 +126,7 @@ theme_bw() +
 labs(x = "Theoretical quantiles",
 y = "Sample quantiles")
 ```
-
+- Talk about explanatory, hence the variables used...
 
 
 Austin Model
