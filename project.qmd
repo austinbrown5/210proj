@@ -79,6 +79,18 @@ player_data %>% filter(position == c("G", "F", "C")) %>%
 
 Ryan Model
 ```{r}
+options(digits = 3)
+
+# Subset the columns used in the linear regression model
+model_data <- player_data[c("NBA__3ptpct", "NCAA_ft", "NCAA__3ptpct", 
+                           "NCAA_fgpct")]
+
+# Remove observations with missing values from the subset
+model_data <- na.omit(model_data)
+
+nba3pt <- lm(NBA__3ptpct ~ NCAA_ft + NCAA__3ptpct + 
+               NCAA_fgpct, data = model_data)
+tidy(nba3pt)
 ```
 
 Austin Model
