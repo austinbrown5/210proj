@@ -138,7 +138,7 @@ library(glmnet)
 set.seed(919)
 y <- player_data$NBA_ppg
 x <- model.matrix(NBA_ppg ~ NCAA_ppg + NCAA_ft + NCAA__3ptpct + NCAA_fgpct
-                  + position*NCAA_ft + position*NCAA_fgpct + 
+                + NCAA_length + position*NCAA_ft + 
                     NCAA_length*NCAA_ppg, data = player_data)
 m_lasso_cv <- cv.glmnet(x, y, alpha = 1)
 best_lambda <- m_lasso_cv$lambda.min
@@ -149,8 +149,7 @@ m_best$beta
 ## Assumptions
 ```{r}
 assumptions_model <- lm(NBA_ppg ~ NCAA_ppg + NCAA_ft + NCAA__3ptpct + NCAA_fgpct
-                  + position*NCAA_ft + position*NCAA_fgpct + 
-                    NCAA_length*NCAA_ppg, data = player_data)
+                  + NCAA_length + NCAA_length*NCAA_ppg, data = player_data)
 assumptions_augment <- augment(assumptions_model)
 
 #residual plot
@@ -183,5 +182,11 @@ ggplot(assumptions_augment, aes(sample = .resid)) +
 ```
 
 ##Results
+```{r Model}
+NBAppg <- lm(NBA_ppg ~ NCAA_ppg + NCAA_ft + NCAA__3ptpct + NCAA_fgpct
+                + NCAA_length + NCAA_length*NCAA_ppg, data = player_data)
+tidy(NBAppg)
+```
+
 
 ##Appendix
