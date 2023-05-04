@@ -55,8 +55,55 @@ range(player_data$NCAA_games)
 ```
 
 ## Introduction
+	For NBA team owners and general managers, the college basketball level 
+	represents a key scouting opportunity as they search for their next potential 
+	draft prospects. In fact, for the 2020-2021 NBA season, 84.5% of players on 
+	NBA rosters played division I college basketball (DNA of Sports). The college 
+	level presents players an opportunity to showcase their abilities on both ends
+	of the floor, and prove to scouts that they are ready for the next level. 
+	However, it’s also important to note that the college game is vastly different 
+	from the NBA game in certain ways. In addition to the rules being slightly 
+	altered, the NBA game is faster-paced, more spread out, and has a higher 
+	concentration of talent on the floor (Brokke). Because of this, a player who 
+	fills the stats sheet and dominates at the college level may not be a 
+	guaranteed top pick and success in the NBA draft. The goal of this research 
+	report is to examine the relationship between college basketball statistics 
+	and NBA statistics, specifically with the focus of scoring ability, and 
+	ultimately derive an optimal model to predict the NBA’s future prolific 
+	scorers based on college performance. 
 
 ## Data
+The dataset we are using for this project comes from Data World in a table that 
+originally contained 34 columns and 4,576 rows. A link to the original data 
+dictionary can be found here. This dataset contains observations of people who 
+have had both NBA and NCAA basketball careers, with data from the beginning of 
+the NBA until 2020. Key identifiers in the dataset include name, date of birth,
+and college. For the purpose of this project, however, we are focused on 
+performance statistics. Specifically, we are looking at NBA PPG 
+(total points/total games played) as a measure of offensive proficiency in the 
+NBA. As our main predictors of interest, we are looking at college performance 
+statistics. This includes PPG, total games played, and also includes measures of 
+efficiency such as field goal percentage (includes both two and three point 
+shots), three point field goal percentage, and free throw percentage. All 
+shooting percentages are measured as total makes divided by total attempts. For 
+the purpose of our research, we eliminated url, birth date, X 
+(number identifier) from our dataset. We also removed NCAA effective field goal 
+percentage, as this is not a commonly measured statistic at the college level, 
+and thus had many missing observations. After we removed these columns, we used 
+the na.omit function to remove all observations with NAs in the columns. In 
+addition to this, we trimmed the data by filtering for observations with a 
+minimum of 6 college games and 21 NBA games, to avoid samples without a 
+reasonable sample size. For the purpose of our investigation, we also altered 
+the position column to only represent a player’s primary position in the case 
+that they were labeled as more than one. For example, if a player was labeled as 
+“G-F” (meaning Guard/Forward), we changed their label to just “G”. We also 
+created a career length variable by subtracting the player’s starting NBA year 
+from their final NBA year. Lastly, we created a new categorical variable, 
+“NCAA_length”, to categorize a player’s college career into one of four 
+categories: “short”, “mid-short”, “mid-long”, and “long”. We did this by 
+splitting the data into quarters given the range of NCAA games in the dataset 
+from 16 to 152. 
+
 
 ## EDA
 
