@@ -24,8 +24,10 @@ library(ggplot2)
 player_data <- read.csv(
   "https://query.data.world/s/5zns27g5v3ce74zgwtcosxygtexpef?dws=00000", 
   header=TRUE, stringsAsFactors=FALSE)
-player_data <-subset(player_data, select = -c(url,birth_date, X) )
+player_data <-subset(player_data, select = -c(url,birth_date, X, NCAA_efgpct
+            ) )
 player_data$career_length <- player_data$active_to - player_data$active_from
+player_data <- na.omit(player_data)
 ```
 
 
@@ -79,10 +81,12 @@ player_data$NCAA_length <- cut(player_data$NCAA_games, breaks = breakpoints,
 ```
 
 ```{r Graph4}
-player_data %>% filter(position == c("G", "F", "C")) %>% 
-  ggplot(mapping = aes(y = career_length, x = position)) +
-  geom_boxplot() +  labs(title = "Career Length Distributions by Position", 
-       x = "Position", y = "Career Length (years)")
+player_data %>% 
+  ggplot(aes(x = NCAA_ppg, y = NBA_ppg, color = NCAA_length)) +
+  geom_point() +
+  facet_wrap(~NCAA_length, nrow = 2, ncol = 4) +
+  labs(x = "NCAA PPG", y = "NBA PPG", color = "NCAA Career Length", title = 
+         "NCAA PPG vs. NBA PPG, by Length of Time in College")
 ```
 
 
