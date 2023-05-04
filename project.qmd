@@ -2,7 +2,11 @@
 title: "210 Project"
 author: "Austin Brown and Ryan Yu"
 format: pdf
+editor: 
+  markdown: 
+    wrap: 72
 ---
+
 ```{r}
 library(tidymodels)
 library(tidyverse)
@@ -30,8 +34,8 @@ player_data$career_length <- player_data$active_to - player_data$active_from
 player_data <- na.omit(player_data)
 ```
 
-
 Potential Cleaning for College Column
+
 ```{r}
 #player_data$college <- gsub("\\bUniversity \\b", "", player_data$college)
 # Load library
@@ -44,14 +48,24 @@ Potential Cleaning for College Column
 #unique(player_data$college)
 ```
 
-Position Variable
+Position and NCAA Career length Variables
+
 ```{r}
 #test
 player_data$position<- substring(player_data$position, first=1, last=1)
+range(player_data$NCAA_games)
+breakpoints <- quantile(player_data$NCAA_games, probs = c(0, 0.25, 0.5, 0.75, 1))
 
+# Use the cut() function to create the four categories
+player_data$NCAA_length <- cut(player_data$NCAA_games, breaks = breakpoints, 
+                               labels = c("short", "mid-short", "mid-long", 
+                                          "long"))
 ```
 
-EDA
+##Introduction See doc ##Data See doc
+
+##EDA
+
 ```{r Graph1}
 player_data %>%
   filter(NBA_g_played > 20) %>% filter(NCAA_games > 20) %>%
@@ -61,6 +75,14 @@ ggplot(mapping = aes(x = NCAA_ppg, y = NBA_ppg)) +
   labs(title = "College vs. NBA PPG", 
        x = "NCAA PPG", y = "NBA PPG")
 ```
+
+Our first initiative was to compare the direct analog to NBA ppg, which
+is NCAA ppg. As can be seen in the scatter plot above, there is a direct
+positive relationship between NCAA PPG and NBA PPG. One interesting
+thing to note, however, is that there are cases of 'high' NBA scoring
+averages (\> 15) even for players who had NCAA scoring averages of less
+than 15 PPG.
+
 ```{r Graph2}
 player_data %>%
   filter(NBA_g_played > 20) %>% filter(NCAA_games > 20) %>%
@@ -70,38 +92,43 @@ ggplot(mapping = aes(x = NCAA_fgpct, y = NBA_ppg)) +
   labs(title = "College FG pct vs. NBA PPG", 
        x = "NCAA FG pct", y = "NBA PPG")
 ```
-```{r Categ. Var}
-range(player_data$NCAA_games)
-breakpoints <- quantile(player_data$NCAA_games, probs = c(0, 0.25, 0.5, 0.75, 1))
-
-# Use the cut() function to create the four categories
-player_data$NCAA_length <- cut(player_data$NCAA_games, breaks = breakpoints, 
-                               labels = c("low", "mid-low", "mid-high", "high"))
-
-```
+The second relationship we wanted to explore is between scoring efficiency in 
+college (in this case NCAA FG pct) and NBA PPG. We also see a generally positive
+relationship between NCAA FG pct and NBA PPG, however, the fitted line in this
+plot has a distinctly less extreme slope than in the previous plot. Both of 
+these plots suggest a relationship between scoring ability and efficiency in 
+college and NBA, however, it is likely that there are more factors involved in
+predicting. especially given that at the college level, most players may not
+be fully developed from a skill, physical, and mental standpoint. We explore 
+this further in the next two graphs. 
 
 ```{r Graph3}
 player_data %>% 
   ggplot(aes(x = NCAA_ppg, y = NBA_ppg, color = NCAA_length)) +
   geom_point() +
+  geom_smooth(method = "lm") + 
   facet_wrap(~NCAA_length, nrow = 2, ncol = 4) +
   labs(x = "NCAA PPG", y = "NBA PPG", color = "NCAA Career Length", title = 
          "NCAA PPG vs. NBA PPG, by Length of Time in College")
 ```
+
 ```{r graph4}
 ggplot(data = player_data, mapping = aes(y = NBA_ppg, x = NCAA_length)) +
   geom_boxplot() +
   labs(x = "NCAA Career Length", y = "NBA PPG", title = 
          "NBA PPG, by Length of Time in College")
 ```
+In the two graphs above, we wanted to get a sense of NBA scoring on a college 
+career length basis. What we can see from both plots is that the two shortest
+categories for college career (likely players that left early for the NBA) have
+observations that spread higher in the NBA ppg category. All four categories 
+maintain the upward sloping fitted line in the scatterplot, however, there is 
+a clear difference amongst the four categories in the NBA scoring averge 
+distributions. This is likely due to the fact that players who have 'lottery 
+pick' potential for the NBA draft will often leave college early. These players
+are more often the players who develop into the most dangerous scoreres in the 
+NBA. As we continue to explore these relationships and begin to craft a model,
+college career length will certainly be taken into consideration.
 
 
-
-
-
-
-
-
-Austin Model
-```{r}
-```
+##Appendix
