@@ -22,6 +22,8 @@ library(naniar)
 library(UpSetR)
 library(lme4)
 library(ggplot2)
+options(warn=-1)
+
 ```
 
 ```{r}
@@ -199,4 +201,26 @@ increase by 0.126 points. Lastly, if a player has a 'mid-long' college career,
 we would on average expect their NBA ppg to be 2.566 lower in comparison to a
 player with a 'short' college career.
 
+To check the predictive power of our model, we are going to compare our model to
+a baseline model, that uses college points per game as the sole predictor as one
+of our goals was to evaluate whether NBA General Managers should evaluate player
+scoring ability with more than just their college points per game. 
+```{r}
+#model assessment
+set.seed(123)
+cv_method <- trainControl(method = "cv", number = 10)
+baseline <- train(NBA_ppg ~ NCAA_ppg, data = player_data, method = "lm", 
+                  trControl = cv_method)
+experiment <- train(NBA_ppg ~ NCAA_ppg + NCAA_ft + NCAA__3ptpct + NCAA_fgpct
+                + NCAA_length + NCAA_length*NCAA_ppg, 
+            data = player_data, method = "lm", trControl = cv_method)
+```
+
+```{r}
+print(baseline)
+```
+
+```{r}
+print(experiment)
+```
 ##Appendix
