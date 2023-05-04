@@ -90,7 +90,7 @@ relationship between NCAA FG pct and NBA PPG, however, the fitted line in this
 plot has a distinctly less extreme slope than in the previous plot. Both of 
 these plots suggest a relationship between scoring ability and efficiency in 
 college and NBA, however, it is likely that there are more factors involved in
-predicting. especially given that at the college level, most players may not
+predicting, especially given that at the college level, most players may not
 be fully developed from a skill, physical, and mental standpoint. We explore 
 this further in the next two graphs. 
 
@@ -184,7 +184,7 @@ expect that on average, NBA ppg will increase by 0.398 points while holding all
 other predictors constant. For NCAA_3ptpct, if that increases by 1, or 100%, we 
 would expect NBA ppg to increase on average by 1.951 points, while holding all 
 other predictors constant. To interpret the percentage terms on a different 
-scale, for NCAA_fgpct, for every 1% increase, we would expect on avergae NBA ppg 
+scale, for NCAA_fgpct, for every 1% increase, we would expect on average NBA ppg 
 to increase by 0.126 points while holding all other predictors constant. Lastly, 
 if a player has a 'mid-long' college career, we would on average expect their 
 NBA ppg to be 2.566 lower in comparison to a player with a 'short' college 
@@ -229,5 +229,55 @@ experiment$results[, c("RMSE", "Rsquared", "MAE")]
 ```
 
 ## Discussion and Conclusion
+From the research we did, we can conclude that the most important college 
+statistics to consider when predicting NBA scoring average are NCAA ppg, NCAA 3
+point percentage, NCAA field goal percentage, and the length of the college 
+career for the player. What our research shows is that it is important for 
+general managers and NBA scouts to look beyond the basic scoring numbers a 
+college player shows. How efficiently a player can score can be an important 
+factor, especially because college players transitioning to the NBA may get a 
+lower volume of shots at the next level, which would affect their total scoring 
+volume. In addition, it is also important to look at the age of a player and how 
+long they’ve been in college. Along with consideration of other important 
+factors, a young, first year college player with a lot of raw talent may have 
+more upside than one of the best college players in the nation that is a 3rd or 
+4th year player.  
+
+Predicting NBA points per game from college basketball statistics is a 
+challenging task due to several potential limitations. First and foremost, it is 
+notoriously difficult to predict individual player performance with a high 
+degree of accuracy. If it were easy, there would be no such thing as "draft 
+busts," where players selected with high expectations fail to live up to their 
+potential. Moreover, there are numerous external factors that can significantly 
+affect a player's career trajectory. For instance, injuries, coaching changes,
+changes in team roles, and off-court distractions can all impact a player's 
+ability to perform at their best. Additionally, the transition from college 
+basketball to the NBA is itself a challenging process that can take time to 
+adjust to, which can further complicate efforts to predict future performance 
+based on college statistics alone. Therefore, while college basketball 
+statistics can be useful in predicting NBA success to some extent, it is 
+essential to recognize the limitations of this approach and to consider other 
+factors that may impact player performance.
+
+In terms of ideas for future work, we can look to incorporate other types of 
+statistics such as defensive metrics, as well as more general basketball metrics 
+such as on/off ratings. This would allow us to assess college players from a 
+more holistic perspective, as scoring is obviously only one part of a total 
+player’s success and impact on a team. In addition, we could look to categorize
+the type of school that players come from, and investigate the impact of that 
+on their future NBA success as well as on how reliable college statistics are 
+for predicting NBA success. High-major players from schools like Duke and 
+Kentucky, for example, may be easier to predict than players from less-known, 
+smaller schools.
 
 ## Appendix
+
+“What Percent of NBA Players Played in College?” DNA of SPORTS, 24 Feb. 2022, https://www.dnaofsports.com/basketball/what-percent-of-NBA-players-played-in-
+college/. 
+
+Brokke, Nathan. “NCAA Mania: Why NBA Is Much Better Basketball than College 
+Hoops.” Bleacher Report, Bleacher Report, 3 Oct. 2017, https://bleacherreport.com/articles/636365-ncaa-mania-why-nba-is-much-better-
+basketball-than-college-hoops. 
+
+“NBA NCAA Comparisons - Project by BGP12.” Data.world, 6 Feb. 2020, https://data.world/bgp12/nbancaacomparisons/workspace/data-dictionary. 
+
