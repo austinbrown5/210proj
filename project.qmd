@@ -51,7 +51,6 @@ Position and NCAA Career length Variables
 ```{r, echo = FALSE, message=FALSE, warning=FALSE}
 #test
 player_data$position<- substring(player_data$position, first=1, last=1)
-range(player_data$NCAA_games)
 ```
 
 ## Introduction
@@ -317,7 +316,7 @@ for predicting NBA success. High-major players from schools like Duke and
 Kentucky, for example, may be easier to predict than players from less-known, 
 smaller schools.
 
-## Appendix
+## Sources
 
 “What Percent of NBA Players Played in College?” DNA of SPORTS, 24 Feb. 2022, https://www.dnaofsports.com/basketball/what-percent-of-NBA-players-played-in-
 college/. 
