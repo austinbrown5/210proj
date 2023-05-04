@@ -46,8 +46,6 @@ player_data <- player_data %>% filter(NBA_g_played > 20) %>%
   filter(NCAA_games > 5) 
 ```
 
-Position and NCAA Career length Variables
-
 ```{r, echo = FALSE, message=FALSE, warning=FALSE}
 #test
 player_data$position<- substring(player_data$position, first=1, last=1)
@@ -106,7 +104,7 @@ from 16 to 152.
 
 ## EDA
 
-```{r Graph1, echo = FALSE, message=FALSE, warning=FALSE}
+```{r Graph1, echo = FALSE, message=FALSE, warning=FALSE, fig.height=3}
 player_data %>%
   ggplot(mapping = aes(x = NCAA_ppg, y = NBA_ppg)) +
   geom_point() +
@@ -122,7 +120,7 @@ thing to note, however, is that there are cases of 'high' NBA scoring
 averages (> 15) even for players who had NCAA scoring averages of less
 than 15 PPG.
 
-```{r Graph2, echo = FALSE, message=FALSE, warning=FALSE}
+```{r Graph2, echo = FALSE, message=FALSE, warning=FALSE, fig.height=3}
 player_data %>%
   ggplot(mapping = aes(x = NCAA_fgpct, y = NBA_ppg)) +
   geom_point() +
@@ -140,7 +138,7 @@ predicting, especially given that at the college level, most players may not
 be fully developed from a skill, physical, and mental standpoint. We explore 
 this further in the next two graphs. 
 
-```{r Graph3, echo = FALSE, message=FALSE, warning=FALSE}
+```{r Graph3, echo = FALSE, message=FALSE, warning=FALSE, fig.height=3}
 player_data %>% 
   ggplot(aes(x = NCAA_ppg, y = NBA_ppg, color = NCAA_length)) +
   geom_point() +
@@ -150,7 +148,7 @@ player_data %>%
          "NCAA PPG vs. NBA PPG, by Length of Time in College")
 ```
 
-```{r graph4, echo = FALSE, message=FALSE, warning=FALSE}
+```{r graph4, echo = FALSE, message=FALSE, warning=FALSE, fig.height=3}
 ggplot(data = player_data, mapping = aes(y = NBA_ppg, x = NCAA_length)) +
   geom_boxplot() +
   labs(x = "NCAA Career Length", y = "NBA PPG", title = 
@@ -182,7 +180,7 @@ m_best <- glmnet(x, y, alpha = 1, lambda = best_lambda)
 m_best$beta
 ```
 ### Assumptions Evaluation
-```{r, echo = FALSE, message=FALSE, warning=FALSE}
+```{r, echo = FALSE, message=FALSE, warning=FALSE, fig.height=3}
 assumptions_model <- lm(NBA_ppg ~ NCAA_ppg + NCAA_ft + NCAA__3ptpct + NCAA_fgpct
                   + NCAA_length + NCAA_length*NCAA_ppg, data = player_data)
 assumptions_augment <- augment(assumptions_model)
@@ -194,7 +192,7 @@ ggplot(assumptions_augment, aes(x = .fitted, y = .resid)) +
   labs(x = "Fitted (predicted) value", y = "Residual") + 
   theme_bw()
 ```
-```{r, echo = FALSE, message=FALSE, warning=FALSE}
+```{r, echo = FALSE, message=FALSE, warning=FALSE, fig.height=3}
 #histogram of residuals
 ggplot(assumptions_augment, aes(x = .resid)) + 
   geom_histogram(aes(y = ..density..), 
@@ -206,7 +204,7 @@ ggplot(assumptions_augment, aes(x = .resid)) +
   labs(x = "Residual", y = "Density", title = "Histogram of Residuals") + 
   theme_bw()
 ```
-```{r, echo = FALSE, message=FALSE, warning=FALSE}
+```{r, echo = FALSE, message=FALSE, warning=FALSE, fig.height=3}
 #qq-plot
 ggplot(assumptions_augment, aes(sample = .resid)) +
   stat_qq() + 
@@ -325,5 +323,7 @@ Brokke, Nathan. “NCAA Mania: Why NBA Is Much Better Basketball than College
 Hoops.” Bleacher Report, Bleacher Report, 3 Oct. 2017, https://bleacherreport.com/articles/636365-ncaa-mania-why-nba-is-much-better-
 basketball-than-college-hoops. 
 
-“NBA NCAA Comparisons - Project by BGP12.” Data.world, 6 Feb. 2020, https://data.world/bgp12/nbancaacomparisons/workspace/data-dictionary. 
+“NBA NCAA Comparisons - Project by BGP12.” Data.world, 6 Feb. 2020,
+
+https://data.world/bgp12/nbancaacomparisons/workspace/data-dictionary. 
 
