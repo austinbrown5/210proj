@@ -54,22 +54,22 @@ player_data$position<- substring(player_data$position, first=1, last=1)
 ```
 
 ## Introduction
-	For NBA team owners and general managers, the college basketball level 
-	represents a key scouting opportunity as they search for their next potential 
-	draft prospects. In fact, for the 2020-2021 NBA season, 84.5% of players on 
-	NBA rosters played division I college basketball (DNA of Sports). The college 
-	level presents players an opportunity to showcase their abilities on both ends
-	of the floor, and prove to scouts that they are ready for the next level. 
-	However, it’s also important to note that the college game is vastly different 
-	from the NBA game in certain ways. In addition to the rules being slightly 
-	altered, the NBA game is faster-paced, more spread out, and has a higher 
-	concentration of talent on the floor (Brokke). Because of this, a player who 
-	fills the stats sheet and dominates at the college level may not be a 
-	guaranteed top pick and success in the NBA draft. The goal of this research 
-	report is to examine the relationship between college basketball statistics 
-	and NBA statistics, specifically with the focus of scoring ability, and 
-	ultimately derive an optimal model to predict the NBA’s future prolific 
-	scorers based on college performance. 
+For NBA team owners and general managers, the college basketball level 
+represents a key scouting opportunity as they search for their next potential 
+draft prospects. In fact, for the 2020-2021 NBA season, 84.5% of players on 
+NBA rosters played division I college basketball (DNA of Sports). The college 
+level presents players an opportunity to showcase their abilities on both ends
+of the floor, and prove to scouts that they are ready for the next level. 
+However, it’s also important to note that the college game is vastly different 
+from the NBA game in certain ways. In addition to the rules being slightly 
+altered, the NBA game is faster-paced, more spread out, and has a higher 
+concentration of talent on the floor (Brokke). Because of this, a player who 
+fills the stats sheet and dominates at the college level may not be a 
+guaranteed top pick and success in the NBA draft. The goal of this research 
+report is to examine the relationship between college basketball statistics 
+and NBA statistics, specifically with the focus of scoring ability, and 
+ultimately derive an optimal model to predict the NBA’s future prolific 
+scorers based on college performance. 
 
 ## Data
 The dataset we are using for this project comes from Data World in a table that 
