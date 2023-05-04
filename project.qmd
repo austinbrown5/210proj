@@ -96,46 +96,10 @@ ggplot(data = player_data, mapping = aes(y = NBA_ppg, x = NCAA_length)) +
 ```
 
 
-Ryan Model
-```{r}
-options(digits = 3)
 
-# Subset the columns used in the linear regression model
-player_data <- player_data %>%
-  filter(NBA__3ptapg > 0.5) %>% filter(NCAA__3ptapg > 0.5) %>%
-  filter(NBA_g_played > 20) %>% filter(NCAA_games > 20) %>% 
-  filter(NCAA_ftapg > 0.3) 
 
-model_data <- player_data[c("NBA__3ptpct", "NCAA_ft", "NCAA__3ptpct", 
-                           "NCAA_fgpct", "position")] 
-# Remove observations with missing values from the subset
-model_data <- na.omit(model_data)
 
-nba3pt <- lm(NBA__3ptpct ~ NCAA_ft + NCAA__3ptpct  
-       , data = model_data)
-#nba3pt <- lm(NBA__3ptpct ~ NCAA__3ptpct, data = model_data)
-tidy(nba3pt)
 
-```
-
-## Assumptions
-```{r Residual Plot}
-nba3pt_aug <- augment(nba3pt)
-ggplot(nba3pt_aug, aes(x = .fitted, y = .resid)) +
-geom_point() +
-geom_hline(yintercept = 0, color = "darkred") +
-labs(x = "Fitted (predicted) value", y = "Residual") +
-theme_bw()
-```
-```{r Theoretical Quantiles Plot}
-ggplot(nba3pt_aug, aes(sample = .resid)) +
-stat_qq() +
-stat_qq_line() +
-theme_bw() +
-labs(x = "Theoretical quantiles",
-y = "Sample quantiles")
-```
-- Talk about explanatory, hence the variables used...
 
 
 Austin Model
