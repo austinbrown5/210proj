@@ -68,14 +68,14 @@ ggplot(mapping = aes(x = NCAA_fgpct, y = NBA_ppg)) +
   labs(title = "College FG pct vs. NBA PPG", 
        x = "NCAA FG pct", y = "NBA PPG")
 ```
-```{r Graph3}
-player_data %>% filter(NBA__3ptapg > 0.5) %>% filter(NCAA_fgapg > 0.3) %>%
-  filter(NBA_g_played > 20) %>% filter(NCAA_games > 20) %>%
-ggplot(mapping = aes(x = NCAA_fgpct, y = NBA__3ptpct)) +
-  geom_point() +
-  geom_smooth(method = "lm") + 
-  labs(title = "College FG Percentage vs. NBA 3pt. Percentage", 
-       x = "NCAA FG %", y = "NBA 3pt. %") + ylim(0, 0.5) + xlim(.2, .75)
+```{r Categ. Var}
+range(player_data$NCAA_games)
+breakpoints <- quantile(player_data$NCAA_games, probs = c(0, 0.25, 0.5, 0.75, 1))
+
+# Use the cut() function to create the four categories
+player_data$NCAA_length <- cut(player_data$NCAA_games, breaks = breakpoints, 
+                               labels = c("low", "mid-low", "mid-high", "high"))
+
 ```
 
 ```{r Graph4}
