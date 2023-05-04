@@ -80,13 +80,19 @@ player_data$NCAA_length <- cut(player_data$NCAA_games, breaks = breakpoints,
 
 ```
 
-```{r Graph4}
+```{r Graph3}
 player_data %>% 
   ggplot(aes(x = NCAA_ppg, y = NBA_ppg, color = NCAA_length)) +
   geom_point() +
   facet_wrap(~NCAA_length, nrow = 2, ncol = 4) +
   labs(x = "NCAA PPG", y = "NBA PPG", color = "NCAA Career Length", title = 
          "NCAA PPG vs. NBA PPG, by Length of Time in College")
+```
+```{r graph4}
+ggplot(data = player_data, mapping = aes(y = NBA_ppg, x = NCAA_length)) +
+  geom_boxplot() +
+  labs(x = "NCAA Career Length", y = "NBA PPG", title = 
+         "NBA PPG, by Length of Time in College")
 ```
 
 
