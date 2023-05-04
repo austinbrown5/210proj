@@ -31,6 +31,14 @@ player_data <- read.csv(
 player_data <-subset(player_data, select = -c(url,birth_date, X, NCAA_efgpct
             ) )
 player_data$career_length <- player_data$active_to - player_data$active_from
+
+breakpoints <- quantile(player_data$NCAA_games, probs = 
+                          c(0, 0.25, 0.5, 0.75, 1), na.rm = TRUE)
+# Use the cut() function to create the four categories
+player_data$NCAA_length <- cut(player_data$NCAA_games, breaks = breakpoints, 
+                               labels = c("short", "mid-short", "mid-long", 
+                                          "long"))
+
 player_data <- na.omit(player_data)
 player_data <- player_data %>% filter(NBA_g_played > 20) %>% 
   filter(NCAA_games > 5) 
@@ -56,12 +64,6 @@ Position and NCAA Career length Variables
 #test
 player_data$position<- substring(player_data$position, first=1, last=1)
 range(player_data$NCAA_games)
-breakpoints <- quantile(player_data$NCAA_games, probs = c(0, 0.25, 0.5, 0.75, 1))
-
-# Use the cut() function to create the four categories
-player_data$NCAA_length <- cut(player_data$NCAA_games, breaks = breakpoints, 
-                               labels = c("short", "mid-short", "mid-long", 
-                                          "long"))
 ```
 
 ##Introduction See doc ##Data See doc
@@ -129,6 +131,23 @@ pick' potential for the NBA draft will often leave college early. These players
 are more often the players who develop into the most dangerous scoreres in the 
 NBA. As we continue to explore these relationships and begin to craft a model,
 college career length will certainly be taken into consideration.
+
+##Methodology
+```{r Model Creation}
+library(glmnet)
+set.seed(919)
+y <- player_data$NBA_ppg
+x <- model.matrix(NBA_ppg ~ NCAA_ppg + NCAA_ft + NCAA__3ptpct + NCAA_fgpct
+                  + position*NCAA_ft + position*NCAA_fgpct + 
+                    NCAA_length*NCAA_ppg, data = player_data)
+m_lasso_cv <- cv.glmnet(x, y, alpha = 1)
+best_lambda <- m_lasso_cv$lambda.min
+plot(m_lasso_cv)
+m_best <- glmnet(x, y, alpha = 1, lambda = best_lambda)
+m_best$beta
+```
+
+
 
 
 ##Appendix
