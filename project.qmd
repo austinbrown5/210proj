@@ -182,6 +182,6 @@ ggplot(assumptions_augment, aes(sample = .resid)) +
        y = "Sample quantiles", title = "Q-Q Plot")
 ```
 
-
+##Results
 
 ##Appendix
