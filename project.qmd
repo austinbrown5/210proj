@@ -169,7 +169,7 @@ ggplot(assumptions_augment, aes(x = .resid)) +
                 args = list(mean = mean(assumptions_augment$.resid),
                             sd = sd(assumptions_augment$.resid)),
                 color = "darkred", linewidth = 2) +
-  labs(x = "Residual", y = "Density") + 
+  labs(x = "Residual", y = "Density", title = "Histogram of Residuals") + 
   theme_bw()
 ```
 ```{r}
@@ -179,7 +179,7 @@ ggplot(assumptions_augment, aes(sample = .resid)) +
   stat_qq_line() + 
   theme_bw() + 
   labs(x = "Theoretical quantiles", 
-       y = "Sample quantiles")
+       y = "Sample quantiles", title = "Q-Q Plot")
 ```
 
 
