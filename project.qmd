@@ -146,7 +146,41 @@ plot(m_lasso_cv)
 m_best <- glmnet(x, y, alpha = 1, lambda = best_lambda)
 m_best$beta
 ```
+## Assumptions
+```{r}
+assumptions_model <- lm(NBA_ppg ~ NCAA_ppg + NCAA_ft + NCAA__3ptpct + NCAA_fgpct
+                  + position*NCAA_ft + position*NCAA_fgpct + 
+                    NCAA_length*NCAA_ppg, data = player_data)
+assumptions_augment <- augment(assumptions_model)
 
+#residual plot
+ggplot(assumptions_augment, aes(x = .fitted, y = .resid)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0, color = "darkred") + 
+  labs(x = "Fitted (predicted) value", y = "Residual") + 
+  theme_bw()
+```
+```{r}
+#histogram of residuals
+ggplot(assumptions_augment, aes(x = .resid)) + 
+  geom_histogram(aes(y = ..density..), 
+                     fill = "deepskyblue", color = "darkblue") + 
+  stat_function(fun = dnorm, 
+                args = list(mean = mean(assumptions_augment$.resid),
+                            sd = sd(assumptions_augment$.resid)),
+                color = "darkred", linewidth = 2) +
+  labs(x = "Residual", y = "Density") + 
+  theme_bw()
+```
+```{r}
+#qq-plot
+ggplot(assumptions_augment, aes(sample = .resid)) +
+  stat_qq() + 
+  stat_qq_line() + 
+  theme_bw() + 
+  labs(x = "Theoretical quantiles", 
+       y = "Sample quantiles")
+```
 
 
 
