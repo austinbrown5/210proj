@@ -32,6 +32,8 @@ player_data <-subset(player_data, select = -c(url,birth_date, X, NCAA_efgpct
             ) )
 player_data$career_length <- player_data$active_to - player_data$active_from
 player_data <- na.omit(player_data)
+player_data <- player_data %>% filter(NBA_g_played > 20) %>% 
+  filter(NCAA_games > 5) 
 ```
 
 Potential Cleaning for College Column
@@ -68,8 +70,7 @@ player_data$NCAA_length <- cut(player_data$NCAA_games, breaks = breakpoints,
 
 ```{r Graph1}
 player_data %>%
-  filter(NBA_g_played > 20) %>% filter(NCAA_games > 20) %>%
-ggplot(mapping = aes(x = NCAA_ppg, y = NBA_ppg)) +
+  ggplot(mapping = aes(x = NCAA_ppg, y = NBA_ppg)) +
   geom_point() +
   geom_smooth(method = "lm") + 
   labs(title = "College vs. NBA PPG", 
@@ -80,13 +81,12 @@ Our first initiative was to compare the direct analog to NBA ppg, which
 is NCAA ppg. As can be seen in the scatter plot above, there is a direct
 positive relationship between NCAA PPG and NBA PPG. One interesting
 thing to note, however, is that there are cases of 'high' NBA scoring
-averages (\> 15) even for players who had NCAA scoring averages of less
+averages (> 15) even for players who had NCAA scoring averages of less
 than 15 PPG.
 
 ```{r Graph2}
 player_data %>%
-  filter(NBA_g_played > 20) %>% filter(NCAA_games > 20) %>%
-ggplot(mapping = aes(x = NCAA_fgpct, y = NBA_ppg)) +
+  ggplot(mapping = aes(x = NCAA_fgpct, y = NBA_ppg)) +
   geom_point() +
   geom_smooth(method = "lm") + 
   labs(title = "College FG pct vs. NBA PPG", 
