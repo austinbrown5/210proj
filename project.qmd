@@ -187,6 +187,16 @@ NBAppg <- lm(NBA_ppg ~ NCAA_ppg + NCAA_ft + NCAA__3ptpct + NCAA_fgpct
                 + NCAA_length + NCAA_length*NCAA_ppg, data = player_data)
 tidy(NBAppg)
 ```
-
+From this model, based off of p-values and a significance level of .05, we can 
+identify the following terms as significant: NCAA_ppg, NCAA_3ptpct, 
+NCAA_fgpct, and NCAA_lengthmid-long, as all of these terms have p values of less
+than 0.05. As for interpreations, if NCAA ppg increases by 1 point, we can 
+expect that on average, NBA ppg will increase by 0.398 points. For NCAA_3ptpct,
+if that increases by 1, or 100%, we would expect NBA ppg to increase on average
+by 1.951 points. To interpret the percentage terms on a different scale, for 
+NCAA_fgpct, for every 1% increase, we would expect on avergae NBA ppg to 
+increase by 0.126 points. Lastly, if a player has a 'mid-long' college career,
+we would on average expect their NBA ppg to be 2.566 lower in comparison to a
+player with a 'short' college career.
 
 ##Appendix
